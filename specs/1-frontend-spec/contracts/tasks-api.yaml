@@ -1,0 +1,236 @@
+# API Contracts: Next.js Frontend for Todo Application
+
+## Overview
+This document defines the API contracts for the frontend-backend communication in the todo application. All endpoints require JWT authentication in the Authorization header.
+
+## Authentication Endpoints
+
+### POST /api/auth/signup
+Register a new user account.
+
+**Request**:
+```json
+{
+  "email": "user@example.com",
+  "password": "securePassword123"
+}
+```
+
+**Response (200 OK)**:
+```json
+{
+  "user": {
+    "id": "user-uuid",
+    "email": "user@example.com"
+  },
+  "token": "jwt-token-string"
+}
+```
+
+**Response (400 Bad Request)**:
+```json
+{
+  "error": "Invalid input",
+  "details": ["Email format invalid", "Password too weak"]
+}
+```
+
+### POST /api/auth/login
+Authenticate an existing user.
+
+**Request**:
+```json
+{
+  "email": "user@example.com",
+  "password": "securePassword123"
+}
+```
+
+**Response (200 OK)**:
+```json
+{
+  "user": {
+    "id": "user-uuid",
+    "email": "user@example.com"
+  },
+  "token": "jwt-token-string"
+}
+```
+
+**Response (401 Unauthorized)**:
+```json
+{
+  "error": "Invalid credentials"
+}
+```
+
+### POST /api/auth/logout
+Log out the current user.
+
+**Headers**:
+```
+Authorization: Bearer <jwt-token>
+```
+
+**Response (200 OK)**:
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+
+## Task Endpoints
+
+All task endpoints require authentication.
+
+### GET /api/tasks
+Retrieve all tasks for the authenticated user.
+
+**Headers**:
+```
+Authorization: Bearer <jwt-token>
+```
+
+**Response (200 OK)**:
+```json
+{
+  "tasks": [
+    {
+      "id": "task-uuid",
+      "userId": "user-uuid",
+      "title": "Sample task",
+      "description": "Task description",
+      "completed": false,
+      "createdAt": "2023-01-01T00:00:00Z",
+      "updatedAt": "2023-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+### POST /api/tasks
+Create a new task for the authenticated user.
+
+**Headers**:
+```
+Authorization: Bearer <jwt-token>
+```
+
+**Request**:
+```json
+{
+  "title": "New task",
+  "description": "Task description",
+  "completed": false
+}
+```
+
+**Response (201 Created)**:
+```json
+{
+  "task": {
+    "id": "task-uuid",
+    "userId": "user-uuid",
+    "title": "New task",
+    "description": "Task description",
+    "completed": false,
+    "createdAt": "2023-01-01T00:00:00Z",
+    "updatedAt": "2023-01-01T00:00:00Z"
+  }
+}
+```
+
+### PUT /api/tasks/{taskId}
+Update an existing task for the authenticated user.
+
+**Headers**:
+```
+Authorization: Bearer <jwt-token>
+```
+
+**Request**:
+```json
+{
+  "title": "Updated task",
+  "description": "Updated description",
+  "completed": true
+}
+```
+
+**Response (200 OK)**:
+```json
+{
+  "task": {
+    "id": "task-uuid",
+    "userId": "user-uuid",
+    "title": "Updated task",
+    "description": "Updated description",
+    "completed": true,
+    "createdAt": "2023-01-01T00:00:00Z",
+    "updatedAt": "2023-01-02T00:00:00Z"
+  }
+}
+```
+
+### DELETE /api/tasks/{taskId}
+Delete a task for the authenticated user.
+
+**Headers**:
+```
+Authorization: Bearer <jwt-token>
+```
+
+**Response (200 OK)**:
+```json
+{
+  "message": "Task deleted successfully"
+}
+```
+
+### PATCH /api/tasks/{taskId}/toggle
+Toggle the completion status of a task.
+
+**Headers**:
+```
+Authorization: Bearer <jwt-token>
+```
+
+**Response (200 OK)**:
+```json
+{
+  "task": {
+    "id": "task-uuid",
+    "userId": "user-uuid",
+    "title": "Sample task",
+    "description": "Task description",
+    "completed": true,
+    "createdAt": "2023-01-01T00:00:00Z",
+    "updatedAt": "2023-01-02T00:00:00Z"
+  }
+}
+```
+
+## Error Responses
+
+All endpoints may return the following error responses:
+
+**401 Unauthorized**:
+```json
+{
+  "error": "Unauthorized: Invalid or missing token"
+}
+```
+
+**404 Not Found**:
+```json
+{
+  "error": "Resource not found"
+}
+```
+
+**500 Internal Server Error**:
+```json
+{
+  "error": "Internal server error"
+}
+```
