@@ -31,8 +31,8 @@ export default function LoginPage() {
       if (response.ok) {
         const data = await response.json();
         // Store the token in localStorage (in a real app, use httpOnly cookies)
-        localStorage.setItem('auth_token', data.token);
-        
+        localStorage.setItem('auth_token', data.data.access_token);
+
         // Redirect to dashboard
         router.push('/dashboard');
         router.refresh(); // Refresh to update the UI
