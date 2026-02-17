@@ -5,7 +5,7 @@ import { useTasks, useCreateTask, useToggleTask, useDeleteTask } from '../../hoo
 import TaskForm from '../../components/dashboard/task-form';
 import TaskList from '../../components/dashboard/task-list';
 import FilterTabs from '../../components/dashboard/filter-tabs';
-import { isAuthenticated, redirectToLogin } from '../../lib/auth';
+import { isAuthenticated, redirectToLogin } from '@/lib/auth';
 
 // Verify authentication on the client side
 if (typeof window !== 'undefined' && !isAuthenticated()) {
