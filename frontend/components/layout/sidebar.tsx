@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -43,10 +44,12 @@ export default function Sidebar() {
           <a href="#" className="flex-shrink-0 w-full group block">
             <div className="flex items-center">
               <div>
-                <img
-                  className="inline-block h-9 w-9 rounded-full"
-                  src="https://via.placeholder.com/150"
-                  alt=""
+                <Image
+                    src="/logo.png"
+                    alt="Logo"
+                    width={32}
+                    height={32}
+                   className="h-8 w-8"
                 />
               </div>
               <div className="ml-3">

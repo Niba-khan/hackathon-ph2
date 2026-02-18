@@ -19,9 +19,9 @@ export const useTasks = () => {
 export const useCreateTask = () => {
   const { mutate } = useSWR<Task[], Error>('/api/tasks', getTasks);
 
-  const create = async (taskData: { title: string; description?: string }) => {
+  const create = async (taskData: { title: string; description?: string; completed?: boolean }) => {
     try {
-      await createTask(taskData);
+      await createTask({ ...taskData, completed: taskData.completed ?? false });
       // Re-fetch the tasks to update the cache
       await mutate();
     } catch (error) {

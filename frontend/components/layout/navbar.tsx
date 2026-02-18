@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { isAuthenticated, getUserInfo } from '../lib/auth';
+import { isAuthenticated, getUserInfo } from '@/lib/auth';
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState<{ email: string } | null>(null);
 
   useEffect(() => {
     setIsLoggedIn(isAuthenticated());
