@@ -1,8 +1,6 @@
-module.exports = {
-  extends: ['next', 'next/core-web-vitals'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  rules: {
-    // Add custom rules here
-  },
-};
+{
+  "extends": ["next", "next/core-web-vitals"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {}
+}
