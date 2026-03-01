@@ -1,7 +1,7 @@
 // Centralized API client with automatic JWT attachment
 import { Task } from '../types/index';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://huggingface.co/spaces/Niba-farooq1/todo-app';
 
 // Helper to get the JWT token from wherever it's stored
 const getToken = (): string | null => {
